@@ -6,8 +6,10 @@ This component is bower registered
 bower install material-date-picker
 ```
 All the necessary files will be automatically included in your index.html if not add
+```css
     <link rel="stylesheet" href="bower_components/material-date-picker/build/styles/main.css" />
     <script src="bower_components/material-date-picker/build/datepicker.js"></script>
+```
 
 If you want to change the color of the input border change this css property
 
