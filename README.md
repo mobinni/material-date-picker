@@ -3,7 +3,7 @@ This small component is still in production it's a simple date picker based on t
 
 https://material.angularjs.org/
 
-##Usage
+##Install
 This component is bower registered 
 ```css
 bower install material-date-picker
@@ -14,13 +14,21 @@ All the necessary files will be automatically included in your index.html if not
     <script src="bower_components/material-date-picker/build/datepicker.js"></script>
 ```
 
+##Usage
 If you want to change the color of the input border change this css property
 ```css
 md-input-group.md-input-focused input, md-input-group.md-input-focused textarea, .md-input-group.md-input-focused input, .md-input-group.md-input-focused textarea {
   border-color: #00897b;
 }
 ```
-If you want to change datepicker properties look at angular-strap datepicker html files
+###Text color
+```html
+<md-date-picker textcolor="#42DFDFD"></md-date-picker>
+```
+
+add a property textColor to the directive
+##Notes
+If you want to change datepicker css properties look at angular-strap datepicker html files
 
 If you have an improvement or request please let me know or post a pull request
 P.S: Date validation is not included as of yet
