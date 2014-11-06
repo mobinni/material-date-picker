@@ -1,4 +1,7 @@
 ## Angular material datepicker
+![Alt text](http://i.imgur.com/zAlNOIe.png)
+
+
 This small component is still in production it's a simple date picker based on the angular-material port of polymer by the people behind ionic
 
 https://material.angularjs.org/
