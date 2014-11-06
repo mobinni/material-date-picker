@@ -1,0 +1,32 @@
+{
+  "name": "material-date-picker",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular-cookies": "~1.2.0",
+    "angular-mocks": "~1.2.0",
+    "angular-resource": "~1.2.0",
+    "angular-sanitize": "~1.2.0",
+    "angular-route": "~1.2.0",
+    "angular-scenario": "~1.2.0",
+    "angular-touch": "~1.2.0",
+    "angular-ui-utils": "bower",
+    "angular-ui": "~0.4.0",
+    "es5-shim": "~3.1.0",
+    "jquery": "~2.1.1",
+    "json3": "~3.3.1"
+  },
+  "appPath": "app",
+  "authors": [
+    "Mo Binni <mobinni@hotmail.com>"
+  ],
+  "description": "A material date picker",
+  "main": "build/app/datepicker.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
