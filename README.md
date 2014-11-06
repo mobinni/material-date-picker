@@ -20,3 +20,4 @@ md-input-group.md-input-focused input, md-input-group.md-input-focused textarea,
 If you want to change datepicker properties look at angular-strap datepicker html files
 
 If you have an improvement or request please let me know or post a pull request
+P.S: Date validation is not included as of yet
