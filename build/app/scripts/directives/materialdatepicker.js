@@ -1,7 +1,7 @@
 (function() {
   var app;
 
-  app = angular.module('materialDatePickerApp');
+  app = angular.module('materialDatePicker');
 
   app.directive('mdDatePicker', [
     '$datepicker', function($datepicker) {

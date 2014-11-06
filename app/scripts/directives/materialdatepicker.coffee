@@ -1,4 +1,4 @@
-app = angular.module('materialDatePickerApp')
+app = angular.module('materialDatePicker')
 app.directive('mdDatePicker', ['$datepicker', ($datepicker)->
   templateUrl: '/views/directives/datepicker.html'
   restrict: 'E'
