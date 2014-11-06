@@ -12,12 +12,11 @@ All the necessary files will be automatically included in your index.html if not
 ```
 
 If you want to change the color of the input border change this css property
-
-For example:
 ```css
 md-input-group.md-input-focused input, md-input-group.md-input-focused textarea, .md-input-group.md-input-focused input, .md-input-group.md-input-focused textarea {
   border-color: #00897b;
 }
 ```
+If you want to change datepicker properties look at angular-strap datepicker html files
 
-Fixes will be implemented soon if you want to contribute please submit a pull request
+If you have an improvement or request please let me know or post a pull request
