@@ -22,7 +22,7 @@
     "Mo Binni <mobinni@hotmail.com>"
   ],
   "description": "A material date picker",
-  "main": "build/datepicker.js",
+  "main": ["build/datepicker.js", "build/styles/main.css"],
   "license": "MIT",
   "ignore": [
     "**/.*",
