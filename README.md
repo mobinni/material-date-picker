@@ -26,7 +26,7 @@ md-input-group.md-input-focused input, md-input-group.md-input-focused textarea,
 ```
 ###Text color
 ```html
-<md-date-picker textcolor="#42DFDFD"></md-date-picker>
+<md-date-picker text-color="#42DFDFD"></md-date-picker>
 ```
 
 add a property textColor to the directive
