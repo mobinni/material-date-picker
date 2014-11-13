@@ -22,7 +22,16 @@
     "Mo Binni <mobinni@hotmail.com>"
   ],
   "description": "A material date picker",
-  "main": ["build/datepicker.js", "build/styles/main.css"],
+  "main": [
+    "build/bower_components/angular-strap/dist/angular-strap.js",
+    "build/bower_components/angular-strap/dist/angular-strap.tpl.js",
+    "build/bower_components/angular-aria/angular-aria.js",
+    "build/bower_components/hammerjs/hammer.js",
+    "build/bower_components/angular-material/angular-material.js",
+    "build/bower_components/angular-material/angular-material.css",
+    "build/datepicker.js",
+    "build/styles/main.css"
+  ],
   "license": "MIT",
   "ignore": [
     "**/.*",

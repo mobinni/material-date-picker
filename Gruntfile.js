@@ -14,12 +14,26 @@ module.exports = function (grunt) {
     copy: {
       build: {
         cwd: 'app',
-        src: ['styles/**', 'views/**'],
+        src: [
+          'styles/**',
+          'views/**'
+        ],
         dest: 'build',
         expand: true
-      }
+      },
+      bower: {
+          cwd:  'bower_components',
+          src: [
+            'angular-strap',
+            'angular-aria/**',
+            'hammerjs/**',
+            'angular-material/**',
+            'angular-ui-utils/**'
+          ],
+          dest: 'build/bower_components',
+          expand: true
+        }
     }
-
   });
 
   // load the tasks
@@ -30,6 +44,7 @@ module.exports = function (grunt) {
   // define the tasks
   grunt.registerTask('build', [
     'coffee:app',
-    'copy'
+    'copy:build',
+    'copy:bower'
   ]);
 };
