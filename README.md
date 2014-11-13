@@ -13,7 +13,15 @@ bower install material-date-picker
 ```
 All the necessary files will be automatically included in your index.html if not add
 ```css
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
     <link rel="stylesheet" href="bower_components/material-date-picker/build/styles/main.css" />
+    
+    <script src="bower_components/angular-strap/dist/angular-strap.js"></script>
+    <script src="bower_components/angular-strap/dist/angular-strap.tpl.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/hammerjs/hammer.js"></script>
+    <script src="bower_components/angular-material/angular-material.js"></script>
+    
     <script src="bower_components/material-date-picker/build/datepicker.js"></script>
 ```
 
