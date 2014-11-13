@@ -20,19 +20,7 @@ module.exports = function (grunt) {
         ],
         dest: 'build',
         expand: true
-      },
-      bower: {
-          cwd:  'bower_components',
-          src: [
-            'angular-strap',
-            'angular-aria/**',
-            'hammerjs/**',
-            'angular-material/**',
-            'angular-ui-utils/**'
-          ],
-          dest: 'build/bower_components',
-          expand: true
-        }
+      }
     }
   });
 
@@ -44,7 +32,6 @@ module.exports = function (grunt) {
   // define the tasks
   grunt.registerTask('build', [
     'coffee:app',
-    'copy:build',
-    'copy:bower'
+    'copy:build'
   ]);
 };
