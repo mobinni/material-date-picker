@@ -1,6 +1,6 @@
 {
   "name": "material-date-picker",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "dependencies": {
     "angular-cookies": "~1.2.0",
     "angular-mocks": "~1.2.0",
