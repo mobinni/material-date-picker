@@ -26,18 +26,16 @@ All the necessary files will be automatically included in your index.html if not
 ```
 
 ##Usage
-If you want to change the color of the input border change this css property
-```css
-md-input-group.md-input-focused input, md-input-group.md-input-focused textarea, .md-input-group.md-input-focused input, .md-input-group.md-input-focused textarea {
-  border-color: #00897b;
-}
-```
-###Text color
+###Attributes
 ```html
-<md-date-picker text-color="#42DFDFD"></md-date-picker>
+<md-date-picker text-color="#42DFDFD" line-color="#EFEFDF"></md-date-picker>
 ```
 
-add a property textColor to the directive
+With the following attributes you can adjust the text color or border color of the input without lifting a css finger
+However if you want to adjust the datepicker inner-colors, as for now you have to override those in css.
+
+The inner table for the datepicker has tr > td > button .btn-primary, .btn-default classes that you can override to get the color you want for the currently selected date and the date of today.
+
 ##Notes
 If you want to change datepicker css properties look at angular-strap datepicker html files
 
