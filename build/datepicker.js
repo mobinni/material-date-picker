@@ -19,13 +19,18 @@
         template: '<div class="md-toolbar-tools dark">' + ' <md-input-group ng-disabled="isDisabled">' + '     <label>{{label}}</label>' + '    <md-input id="date-picker" model-view-value="true"' + '             ng-model="value" bs-datepicker></md-input>' + '</md-input-group>' + '</div>',
         restrict: 'E',
         scope: {
-          lineColor: '@',
-          textColor: '@',
-          mask: '@'
+          lineColor: "@",
+          textColor: "@",
+          mask: "@"
         },
         link: function(scope, element, attrs) {
+          var picker;
+          picker = $("#date-picker");
           if (scope.textColor) {
-            $('#date-picker').attr('style', 'color:' + scope.textColor + '!important');
+            picker.css("color", scope.textColor, "important");
+          }
+          if (scope.lineColor) {
+            picker.css("border-color", scope.lineColor, "important");
           }
         }
       };

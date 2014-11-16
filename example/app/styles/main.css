@@ -3,7 +3,3 @@ body {
   padding-top: 20px;
   padding-bottom: 20px;
 }
-
-md-input-group.md-input-focused input, md-input-group.md-input-focused textarea, .md-input-group.md-input-focused input, .md-input-group.md-input-focused textarea {
-  border-color: #00897b;
-}
