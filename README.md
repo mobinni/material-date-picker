@@ -36,6 +36,13 @@ However if you want to adjust the datepicker inner-colors, as for now you have t
 
 The inner table for the datepicker has tr > td > button .btn-primary, .btn-default classes that you can override to get the color you want for the currently selected date and the date of today.
 
+##Known issues
+###Angular UI Booststrap
+This component does not work well in conjuction with Angular UI Boostrap. This library has certain similar features that would
+make existing functionality break when installing this component. $modal.open for instance from the Angular UI library would not work.
+
+I strongly advise only to use this component if you're using Angular-Strap out of the box. You can always try to mix the two, but issues may occur.
+
 ##Notes
 If you want to change datepicker css properties look at angular-strap datepicker html files
 
