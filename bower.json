@@ -35,6 +35,7 @@
   "license": "MIT",
   "ignore": [
     "**/.*",
+    "example/**",
     "node_modules",
     "test",
     "tests"

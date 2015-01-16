@@ -14,9 +14,9 @@
   app = angular.module('materialDatePicker', ['mgcrea.ngStrap', 'ngMaterial', 'ui.utils']);
 
   app.directive('mdDatePicker', [
-    '$datepicker', function($datepicker) {
+    function() {
       return {
-        template: '<div class="md-toolbar-tools dark">' + ' <md-input-group ng-disabled="isDisabled">' + '     <label>{{label}}</label>' + '    <md-input id="date-picker" model-view-value="true"' + '             ng-model="value" bs-datepicker></md-input>' + '</md-input-group>' + '</div>',
+        template: '<div class="md-toolbar-tools dark">' + ' <md-input-group ng-disabled="isDisabled">' + '     <label>{{label}}</label>' + '    <md-input id="date-picker" model-view-value="true" ng-model="value" data-date-format="{{ mask }}" bs-datepicker></md-input>' + '</md-input-group>' + '</div>',
         restrict: 'E',
         scope: {
           lineColor: "@",
@@ -25,12 +25,9 @@
         },
         link: function(scope, element, attrs) {
           var picker;
-          picker = $("#date-picker");
+          picker = element.find("#date-picker");
           if (scope.textColor) {
-            picker.css("color", scope.textColor, "important");
-          }
-          if (scope.lineColor) {
-            picker.css("border-color", scope.lineColor, "important");
+            picker.prepend('<style type="text/css"> #date-picker { color:' + scope.textColor + '!important; border-color:' + scope.lineColor + '!important; } </style>')("color", scope.textColor, "important");
           }
         }
       };

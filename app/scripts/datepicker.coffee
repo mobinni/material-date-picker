@@ -15,12 +15,11 @@ app = angular
     'ui.utils'
   ])
 
-app.directive('mdDatePicker', ['$datepicker', ($datepicker)->
+app.directive('mdDatePicker', [ ()->
     template: '<div class="md-toolbar-tools dark">' +
       ' <md-input-group ng-disabled="isDisabled">' +
       '     <label>{{label}}</label>' +
-      '    <md-input id="date-picker" model-view-value="true"' +
-      '             ng-model="value" bs-datepicker></md-input>' +
+      '    <md-input id="date-picker" model-view-value="true" ng-model="value" data-date-format="{{ mask }}" bs-datepicker></md-input>' +
       '</md-input-group>' +
       '</div>'
     restrict: 'E'
@@ -30,8 +29,7 @@ app.directive('mdDatePicker', ['$datepicker', ($datepicker)->
       mask: "@"
 
     link: (scope, element, attrs) ->
-      picker = $("#date-picker")
-      picker.css "color", scope.textColor, "important"  if scope.textColor
-      picker.css "border-color", scope.lineColor, "important"  if scope.lineColor
+      picker = element.find("#date-picker")
+      picker.prepend('<style type="text/css"> #date-picker { color:' + scope.textColor + '!important; border-color:' + scope.lineColor + '!important; } </style>') "color", scope.textColor, "important"  if scope.textColor
       return
 ])
