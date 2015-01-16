@@ -28,7 +28,7 @@ All the necessary files will be automatically included in your index.html if not
 ##Usage
 ###Attributes
 ```html
-<md-date-picker text-color="#42DFDFD" line-color="#EFEFDF"></md-date-picker>
+<md-date-picker text-color="#42DFDFD" line-color="#EFEFDF" mask="yyyy-MM-dd"></md-date-picker>
 ```
 
 With the following attributes you can adjust the text color or border color of the input without lifting a css finger
