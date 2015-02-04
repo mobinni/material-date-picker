@@ -9,5 +9,5 @@
  */
 angular.module('workingApp')
   .controller('MainCtrl', function ($scope) {
-
+      $scope.date = ''
   });
