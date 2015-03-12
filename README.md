@@ -36,7 +36,7 @@ However if you want to adjust the datepicker inner-colors, as for now you have t
 
 
 ##Known issues
-
+If you can't find the SVG images, look in the images map of the bower component and copy these to your own images map. I left this as an open option.
 ##Notes
 The datepicker has changed enormously since the last commit, thinking no one used it I did not update the documents so here's an update
 
