@@ -37,7 +37,7 @@ app.directive('mbDatepicker', [()->
   }
   template: '
             <div class="date-selectors"  outside-click="hidePicker()">
-                    <input type="text"  ng-click="showPicker()"  class="form-control"  ng-model="date" placeholder="Pick a date">
+                    <input type="text" class="mb-input-field"  ng-click="showPicker()"  class="form-control"  ng-model="date" placeholder="Pick a date">
                     <div class="mb-datepicker" ng-show="isVisible">
                         <table>
                             <caption>
@@ -73,12 +73,22 @@ app.directive('mbDatepicker', [()->
   restrict: 'E',
   transclude: true,
   link: (scope, element, attrs) ->
+    element.find('.date-selectors').prepend('
+        <style>
+            .mb-input-field {
+              color:' + scope.textColor + ';
+            }
+            .mb-input-field:hover {
+                border-color:' + scope.lineColor + ';
+            }
+        </style>
+    ')
     today = moment()
     scope.month = '';
     scope.year = today.year();
     if !scope.dateFormat then scope.dateFormat = "YYYY-MM-DD"
-    #scope.minDate = moment(scope.minDate, scope.dateFormat)
-    #scope.maxDate = moment(scope.maxDate, scope.dateFormat)
+    if !scope.minDate then scope.minDate = moment(scope.minDate, scope.dateFormat)
+    if !scope.maxDate then scope.maxDate = moment(scope.maxDate, scope.dateFormat)
 
 
     getWeeks = (monthLength, startDay, month) ->
@@ -194,6 +204,7 @@ app.directive('mbDatepicker', [()->
     init = ->
       # First day of month
       firstMonday = moment(moment().date(today.month())).startOf('isoweek')
+      if(firstMonday.format('DD') != '01') then firstMonday.subtract(1,'weeks')
 
       # No. of days in month
       days = moment(moment().date(today.month())).daysInMonth()

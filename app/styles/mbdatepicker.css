@@ -102,3 +102,7 @@ caption {
   -moz-user-select: none;
   user-select: none;
 }
+.mb-input-field {
+  border-radius: 0;
+  border-bottom: 1px solid red;
+}
