@@ -14,7 +14,7 @@ app.directive("outsideClick", ['$document', '$parse', ($document, $parse) ->
   link: ($scope, $element, $attributes) ->
     scopeExpression = $attributes.outsideClick
     onDocumentClick = (event) ->
-      isChild = $element[0] == event.target.parentNode;
+      isChild = $element.find(event.target.tagName).length > 0;
       $scope.$apply scopeExpression  unless isChild
       return
 
