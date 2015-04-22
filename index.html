@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Material-date-picker : A simple material datepicker ">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Material-date-picker</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/mobinni/material-date-picker">View on GitHub</a>
+
+          <h1 id="project_title">Material-date-picker</h1>
+          <h2 id="project_tagline">A simple material datepicker </h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/mobinni/material-date-picker/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/mobinni/material-date-picker/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h2>
+<a id="angular-material-datepicker" class="anchor" href="#angular-material-datepicker" aria-hidden="true"><span class="octicon octicon-link"></span></a>Angular material datepicker</h2>
+
+<p><img src="http://i.imgur.com/dexQ7sd.png" alt="Alt text"></p>
+
+<p>This small component is still in production it's a simple date picker based on the angular-material port of polymer by the people behind ionic</p>
+
+<p><a href="https://material.angularjs.org/">https://material.angularjs.org/</a></p>
+
+<h2>
+<a id="install" class="anchor" href="#install" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install</h2>
+
+<p>This component is bower and npm registered </p>
+
+<div class="highlight highlight-css"><pre>bower install material-date-picker
+npm install material-date-picker</pre></div>
+
+<p>All the necessary files will be automatically included in your index.html if not add</p>
+
+<div class="highlight highlight-css"><pre>    &lt;<span class="pl-ent">link</span> rel="stylesheet" href="bower_components/material-date-picker/build/styles/mbdatepicker<span class="pl-e">.css</span>/&gt;
+    &lt;<span class="pl-ent">script</span> src="bower_components/material-date-picker/build/mbdatepicker<span class="pl-e">.js</span>"&gt;&lt;/<span class="pl-ent">script</span>&gt;</pre></div>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<h3>
+<a id="attributes" class="anchor" href="#attributes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Attributes</h3>
+
+<div class="highlight highlight-html"><pre>
+&lt;<span class="pl-ent">mb</span><span class="pl-e">-datepicker</span> <span class="pl-e">element-id</span>=<span class="pl-s"><span class="pl-pds">'</span>date1<span class="pl-pds">'</span></span>
+               <span class="pl-e">date-message</span>=<span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>
+               <span class="pl-e">text-color</span>=<span class="pl-s"><span class="pl-pds">"</span>#EFEF23<span class="pl-pds">"</span></span>
+               <span class="pl-e">line-color</span>=<span class="pl-s"><span class="pl-pds">"</span>#DDFE66<span class="pl-pds">"</span></span>
+               <span class="pl-e">line-thickness</span>=<span class="pl-s"><span class="pl-pds">"</span>3<span class="pl-pds">"</span></span>
+               <span class="pl-e">date</span>=<span class="pl-s"><span class="pl-pds">"</span>date<span class="pl-pds">"</span></span>
+               <span class="pl-e">date-format</span>=<span class="pl-s"><span class="pl-pds">"</span>YYYY-MM-DD<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">mb</span><span class="pl-e">-datepicker</span>&gt;</pre></div>
+
+<p>With the following attributes you can adjust the text color or border color of the input without lifting a css finger
+However if you want to adjust the datepicker inner-colors, as for now you have to override those in css.</p>
+
+<p>An example is provided.</p>
+
+<h2>
+<a id="known-issues" class="anchor" href="#known-issues" aria-hidden="true"><span class="octicon octicon-link"></span></a>Known issues</h2>
+
+<p>If you can't find the SVG images, look in the images map of the bower component and copy these to your own images map. I left this as an open option.
+The datepicker is known to throw a JQuery light error because of the way the styles are applied to generate enabled or disabled dates.
+It does not lag the performance, I find it to be ugly, it will be the next thing on my list to fix.</p>
+
+<h2>
+<a id="notes" class="anchor" href="#notes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Notes</h2>
+
+<p>The datepicker has changed enormously since the last commit, thinking no one used it I did not update the documents so here's an update</p>
+
+<p>If you have an improvement or request please let me know or post a pull request</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Material-date-picker maintained by <a href="https://github.com/mobinni">mobinni</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
