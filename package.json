@@ -1,11 +1,31 @@
 {
-  "name": "materialdatepicker",
-  "version": "0.0.0",
-  "dependencies": {},
-  "devDependencies": {
+  "name": "material-date-picker",
+  "version": "0.0.3",
+  "dependencies": {
+    "moment": "~2.9.0"
   },
-  "engines": {
+  "devDependencies": {},
+  "engines": {},
+  "scripts": {},
+  "description": "![Alt text](http://i.imgur.com/zAlNOIe.png)",
+  "main": "build/mbdatepicker.js",
+  "directories": {
+    "example": "example"
   },
-  "scripts": {
-  }
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mobinni/material-date-picker.git"
+  },
+  "keywords": [
+    "material",
+    "date",
+    "picker",
+    "materialdatepicker"
+  ],
+  "author": "Mo Binni",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mobinni/material-date-picker/issues"
+  },
+  "homepage": "https://github.com/mobinni/material-date-picker"
 }

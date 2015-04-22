@@ -21,7 +21,7 @@
           scopeExpression = $attributes.outsideClick;
           onDocumentClick = function(event) {
             var isChild;
-            isChild = $element.find(event.target).length > 0;
+            isChild = $element[0] === event.target.parentNode;
             if (!isChild) {
               $scope.$apply(scopeExpression);
             }
@@ -53,7 +53,7 @@
         transclude: true,
         link: function(scope, element, attrs) {
           var getWeeks, init, today;
-          element.find('.date-selectors').prepend('<style> .mb-input-field:hover { border-color:' + scope.lineColor + '; color:' + scope.textColor + '; } </style>');
+          element.find('.date-selectors').prepend('<style> .mb-input-field { color:' + scope.textColor + '; } .mb-input-field:hover { border-color:' + scope.lineColor + '; } </style>');
           today = moment();
           scope.month = '';
           scope.year = today.year();
@@ -204,6 +204,9 @@
           init = function() {
             var days, endDate, firstMonday;
             firstMonday = moment(moment().date(today.month())).startOf('isoweek');
+            if (firstMonday.format('DD') !== '01') {
+              firstMonday.subtract(1, 'weeks');
+            }
             days = moment(moment().date(today.month())).daysInMonth();
             endDate = moment().add(1, 'months').date(0);
             scope.month = endDate.format('MMMM');
