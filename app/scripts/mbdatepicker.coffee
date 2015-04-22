@@ -87,8 +87,8 @@ app.directive('mbDatepicker', [()->
     scope.month = '';
     scope.year = today.year();
     if !scope.dateFormat then scope.dateFormat = "YYYY-MM-DD"
-    if !scope.minDate then scope.minDate = moment(scope.minDate, scope.dateFormat)
-    if !scope.maxDate then scope.maxDate = moment(scope.maxDate, scope.dateFormat)
+    if scope.minDate then scope.minDate = moment(scope.minDate, scope.dateFormat)
+    if scope.maxDate then scope.maxDate = moment(scope.maxDate, scope.dateFormat)
 
 
     getWeeks = (monthLength, startDay, month) ->
