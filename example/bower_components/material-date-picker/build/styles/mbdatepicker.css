@@ -57,7 +57,6 @@ caption {
   display: inline-block;
 }
 .mb-datepicker table tbody tr td{
-  font-family:'Open Sans', sans-serif;
   text-align: center;
   padding: 10px;
   cursor: pointer;

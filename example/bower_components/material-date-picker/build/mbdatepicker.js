@@ -54,7 +54,7 @@
         transclude: true,
         link: function(scope, element, attrs) {
           var getWeeks, init, today;
-          angular.element(document.querySelector('#dateSelectors')).prepend('<style> .mb-input-field { color:' + scope.textColor + '; border-color:' + scope.lineColor + '; border-width:' + scope.lineThickness + '; border-left: 0px; border-right: 0px; border-top: 0px; } </style>');
+          angular.element(document.querySelector('#dateSelectors')).prepend('<style> .mb-input-field { color:' + scope.textColor + '; border-color:' + scope.lineColor + '; border-width:' + scope.lineThickness + 'px; border-left: 0px; border-right: 0px; border-top: 0px; } </style>');
           today = moment();
           scope.month = '';
           scope.year = today.year();
