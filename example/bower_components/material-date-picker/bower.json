@@ -1,0 +1,26 @@
+{
+  "name": "material-date-picker",
+  "version": "1.0.3",
+  "dependencies": {
+    "moment": "~2.9.0"
+  },
+  "appPath": "app",
+  "authors": [
+    "Mo Binni <mobinni@hotmail.com>"
+  ],
+  "description": "A material date picker",
+  "main": [
+    "build/mbdatepicker.js",
+    "build/styles/mbdatepicker.css"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "example/**",
+    "node_modules",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+  }
+}
