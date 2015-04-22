@@ -53,7 +53,7 @@
         transclude: true,
         link: function(scope, element, attrs) {
           var getWeeks, init, today;
-          element.find('.date-selectors').prepend('<style> .mb-input-field { color:' + scope.textColor + '; } .mb-input-field:hover { border-color:' + scope.lineColor + '; } </style>');
+          element.find('.date-selectors').prepend('<style> .mb-input-field { color:' + scope.textColor + '; border-color:' + scope.lineColor + '; border-left: 0px; border-right: 0px; border-top: 0px; } </style>');
           today = moment();
           scope.month = '';
           scope.year = today.year();
