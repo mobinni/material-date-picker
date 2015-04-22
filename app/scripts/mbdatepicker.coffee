@@ -79,7 +79,7 @@ app.directive('mbDatepicker', [()->
             .mb-input-field {
               color:' + scope.textColor + ';
               border-color:' + scope.lineColor + ';
-              border-width:' + scope.lineThickness + ';
+              border-width:' + scope.lineThickness + 'px;
               border-left: 0px;
               border-right: 0px;
               border-top: 0px;
