@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="bower_components/material-date-picker/build/styles/mbdatepicker.css"/>
+	<title>Example app</title>
+</head>
+<body ng-app="exampleApp">
+
+<div ng-controller="MainCtrl">
+	<mb-datepicker element-id='date1'
+	               text-color="#EFEF23"
+	               line-color="#DDFE66"
+	               line-thickness="3"
+	               date="date"
+	               date-format="YYYY-MM-DD"></mb-datepicker>
+</div>
+</body>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/material-date-picker/build/mbdatepicker.js"></script>
+<script src="bower_components/moment/moment.js"></script>
+<script src="app.js"></script>
+</html>
