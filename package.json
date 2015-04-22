@@ -4,7 +4,11 @@
   "dependencies": {
     "moment": "~2.9.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-coffee": "^0.13.0",
+    "grunt-contrib-copy": "^0.8.0"
+  },
   "engines": {},
   "scripts": {},
   "description": "![Alt text](http://i.imgur.com/zAlNOIe.png)",

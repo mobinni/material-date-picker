@@ -6,7 +6,7 @@
     * @name materialDatePickerApp
     * @description
     * # materialDatePickerApp
-    *
+   #
     * Main module of the application.
    */
   var app;
@@ -68,9 +68,9 @@
             scope.maxDate = moment(scope.maxDate, scope.dateFormat);
           }
           getWeeks = function(monthLength, startDay, month) {
-            var chunk_size, day, monthDays, newDate, start, weeks, _i;
+            var chunk_size, day, j, monthDays, newDate, ref, start, weeks;
             monthDays = [];
-            for (day = _i = 0; 0 <= monthLength ? _i <= monthLength : _i >= monthLength; day = 0 <= monthLength ? ++_i : --_i) {
+            for (day = j = 0, ref = monthLength; 0 <= ref ? j <= ref : j >= ref; day = 0 <= ref ? ++j : --j) {
               start = moment(startDay);
               newDate = start.add(day, 'd');
               if (scope.minDate && moment(newDate, scope.dateFormat) <= moment(scope.minDate, scope.dateFormat)) {
