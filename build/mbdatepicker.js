@@ -21,7 +21,7 @@
           scopeExpression = $attributes.outsideClick;
           onDocumentClick = function(event) {
             var isChild;
-            isChild = $element[0] === event.target.parentNode;
+            isChild = $element.find(event.target.tagName).length > 0;
             if (!isChild) {
               $scope.$apply(scopeExpression);
             }
@@ -60,10 +60,10 @@
           if (!scope.dateFormat) {
             scope.dateFormat = "YYYY-MM-DD";
           }
-          if (!scope.minDate) {
+          if (scope.minDate) {
             scope.minDate = moment(scope.minDate, scope.dateFormat);
           }
-          if (!scope.maxDate) {
+          if (scope.maxDate) {
             scope.maxDate = moment(scope.maxDate, scope.dateFormat);
           }
           getWeeks = function(monthLength, startDay, month) {
