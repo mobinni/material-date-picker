@@ -46,14 +46,15 @@
           maxDate: '@',
           dateMessage: '@',
           textColor: '@',
-          lineColor: '@'
+          lineColor: '@',
+          lineThickness: '@'
         },
         template: '<div class="date-selectors"  outside-click="hidePicker()"> <input type="text" class="mb-input-field"  ng-click="showPicker()"  class="form-control"  ng-model="date" placeholder="Pick a date"> <div class="mb-datepicker" ng-show="isVisible"> <table> <caption> <div class="header-year-wrapper"> <span style="display: inline-block; float: left; padding-left:20px; cursor: pointer" class="noselect" ng-click="previousYear(currentDate)"><img style="height: 10px;" src="images/white_arrow_left.svg"/></span> <span class="header-year noselect" ng-class="noselect">{{ year }}</span> <span style="display: inline-block; float: right; padding-right:20px; cursor: pointer" class="noselect" ng-click="nextYear(currentDate)"><img style="height: 10px;" src="images/white_arrow_right.svg"/></span> </div> <div class="header-nav-wrapper"> <span class="header-item noselect" style="float: left; cursor:pointer" ng-click="previousMonth(currentDate)"><img style="height: 10px;" src="images/grey_arrow_left.svg"/></span> <span class="header-month noselect">{{ month }}</span> <span class="header-item header-right noselect" style="float: right; cursor:pointer" ng-click="nextMonth(currentDate)"> <img style="height: 10px;" src="images/grey_arrow_right.svg"/></span> </div> </caption> <tbody> <tr> <td class="day-head">Mon</td> <td class="day-head">Tue</td> <td class="day-head">Wed</td> <td class="day-head">Thu</td> <td class="day-head">Fri</td> <td class="day-head">Sat</td> <td class="day-head">Sun</td> </tr> <tr class="days" ng-repeat="week in weeks"> <td ng-style="day.isToday" ng-click="selectDate(day)" class="noselect" ng-class="day.class" ng-repeat="day in week">{{ day.value.format(\'DD\') }}</td> </tr> </tbody> </table> </div> </div>',
         restrict: 'E',
         transclude: true,
         link: function(scope, element, attrs) {
           var getWeeks, init, today;
-          element.find('.date-selectors').prepend('<style> .mb-input-field { color:' + scope.textColor + '; border-color:' + scope.lineColor + '; border-left: 0px; border-right: 0px; border-top: 0px; } </style>');
+          angular.element(document.querySelector('#dateSelectors')).prepend('<style> .mb-input-field { color:' + scope.textColor + '; border-color:' + scope.lineColor + '; border-width:' + scope.lineThickness + '; border-left: 0px; border-right: 0px; border-top: 0px; } </style>');
           today = moment();
           scope.month = '';
           scope.year = today.year();

@@ -34,6 +34,7 @@ app.directive('mbDatepicker', [()->
     dateMessage: '@'
     textColor: '@'
     lineColor: '@'
+    lineThickness: '@'
   }
   template: '
             <div class="date-selectors"  outside-click="hidePicker()">
@@ -73,11 +74,12 @@ app.directive('mbDatepicker', [()->
   restrict: 'E',
   transclude: true,
   link: (scope, element, attrs) ->
-    element.find('.date-selectors').prepend('
+    angular.element(document.querySelector('#dateSelectors')).prepend('
         <style>
             .mb-input-field {
               color:' + scope.textColor + ';
               border-color:' + scope.lineColor + ';
+              border-width:' + scope.lineThickness + ';
               border-left: 0px;
               border-right: 0px;
               border-top: 0px;
@@ -203,9 +205,9 @@ app.directive('mbDatepicker', [()->
       return
 
     init = ->
-      # First day of month
+# First day of month
       firstMonday = moment(moment().date(today.month())).startOf('isoweek')
-      if(firstMonday.format('DD') != '01') then firstMonday.subtract(1,'weeks')
+      if(firstMonday.format('DD') != '01') then firstMonday.subtract(1, 'weeks')
 
       # No. of days in month
       days = moment(moment().date(today.month())).daysInMonth()
@@ -220,7 +222,7 @@ app.directive('mbDatepicker', [()->
 
       scope.currentDate = firstMonday
       scope.weeks = getWeeks(
-        # No. of days in a month from sunday to sunday
+# No. of days in a month from sunday to sunday
         endDate.diff(firstMonday, 'days'),
         firstMonday,
         today.month()
