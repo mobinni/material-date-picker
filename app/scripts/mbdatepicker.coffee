@@ -1,12 +1,7 @@
 'use strict'
 
 ###*
- # @ngdoc overview
- # @name materialDatePickerApp
- # @description
- # # materialDatePickerApp
- #
- # Main module of the application.
+ # By Mo Binni
 ###
 app = angular.module('materialDatePicker', [])
 
@@ -31,10 +26,9 @@ app.directive('mbDatepicker', [()->
     dateFormat: '@'
     minDate: '@'
     maxDate: '@'
-    dateMessage: '@'
-    textColor: '@'
-    lineColor: '@'
-    lineThickness: '@'
+    inputClass: '@'
+    arrows: '='
+    calendarHeader: '='
   }
   template: '
             <div id="dateSelectors" class="date-selectors"  outside-click="hidePicker()">
@@ -43,28 +37,28 @@ app.directive('mbDatepicker', [()->
                         <table>
                             <caption>
                               <div class="header-year-wrapper">
-                                  <span style="display: inline-block; float: left; padding-left:20px; cursor: pointer" class="noselect" ng-click="previousYear(currentDate)"><img style="height: 10px;" src="images/white_arrow_left.svg"/></span>
+                                  <span style="display: inline-block; float: left; padding-left:20px; cursor: pointer" class="noselect" ng-click="previousYear(currentDate)"><img style="height: 10px;" ng-src="{{ arrows.year.left }}"/></span>
                                   <span class="header-year noselect" ng-class="noselect">{{ year }}</span>
-                                  <span style="display: inline-block; float: right; padding-right:20px; cursor: pointer" class="noselect" ng-click="nextYear(currentDate)"><img style="height: 10px;" src="images/white_arrow_right.svg"/></span>
+                                  <span style="display: inline-block; float: right; padding-right:20px; cursor: pointer" class="noselect" ng-click="nextYear(currentDate)"><img style="height: 10px;" ng-src="{{ arrows.year.right }}"/></span>
                               </div>
                               <div class="header-nav-wrapper">
-                                  <span class="header-item noselect" style="float: left; cursor:pointer" ng-click="previousMonth(currentDate)"><img style="height: 10px;" src="images/grey_arrow_left.svg"/></span>
+                                  <span class="header-item noselect" style="float: left; cursor:pointer" ng-click="previousMonth(currentDate)"><img style="height: 10px;" ng-src="{{ arrows.month.left }}"/></span>
                                   <span class="header-month noselect">{{ month }}</span>
-                                  <span class="header-item header-right noselect" style="float: right; cursor:pointer" ng-click="nextMonth(currentDate)"> <img style="height: 10px;" src="images/grey_arrow_right.svg"/></span>
+                                  <span class="header-item header-right noselect" style="float: right; cursor:pointer" ng-click="nextMonth(currentDate)"> <img style="height: 10px;" ng-src="{{ arrows.month.right }}"/></span>
                               </div>
                             </caption>
                             <tbody>
                               <tr>
-                                <td class="day-head">Mon</td>
-                                <td class="day-head">Tue</td>
-                                <td class="day-head">Wed</td>
-                                <td class="day-head">Thu</td>
-                                <td class="day-head">Fri</td>
-                                <td class="day-head">Sat</td>
-                                <td class="day-head">Sun</td>
+                                <td class="day-head">{{ calendarHeader.monday }}</td>
+                                <td class="day-head">{{ calendarHeader.tuesday }}</td>
+                                <td class="day-head">{{ calendarHeader.wednesday }}</td>
+                                <td class="day-head">{{ calendarHeader.thursday }}</td>
+                                <td class="day-head">{{ calendarHeader.friday }}</td>
+                                <td class="day-head">{{ calendarHeader.saturday }}</td>
+                                <td class="day-head">{{ calendarHeader.sunday }}</td>
                               </tr>
                               <tr class="days" ng-repeat="week in weeks">
-                                <td ng-style="day.isToday" ng-click="selectDate(day)" class="noselect" ng-class="day.class" ng-repeat="day in week">{{ day.value.format(\'DD\') }}</td>
+                                <td ng-click="selectDate(day)" class="noselect" ng-class="day.class" ng-repeat="day in week">{{ day.value.format(\'DD\') }}</td>
                               </tr>
                             </tbody>
                         </table>
@@ -74,26 +68,40 @@ app.directive('mbDatepicker', [()->
   restrict: 'E',
   transclude: true,
   link: (scope, element, attrs) ->
-    angular.element(document.querySelector('#dateSelectors')).prepend('
-        <style>
-            .mb-input-field {
-              color:' + scope.textColor + ';
-              border-color:' + scope.lineColor + ';
-              border-width:' + scope.lineThickness + 'px;
-              border-left: 0px;
-              border-right: 0px;
-              border-top: 0px;
-            }
-        </style>
-    ')
+    console.log scope.calendarHeader
+# Vars
+    selectors = document.querySelector('#dateSelectors')
     today = moment()
     scope.month = '';
     scope.year = today.year();
+
+    # Casual definition
+    if scope.inputClass then selectors.className = selectors.className + " " + scope.inputClass
     if !scope.dateFormat then scope.dateFormat = "YYYY-MM-DD"
     if scope.minDate then scope.minDate = moment(scope.minDate, scope.dateFormat)
     if scope.maxDate then scope.maxDate = moment(scope.maxDate, scope.dateFormat)
+    if !scope.calendarHeader then scope.calendarHeader = {
+      monday: 'Mon',
+      tuesday: 'Tue',
+      wednesday: 'Wed',
+      thursday: 'Thu',
+      friday: 'Fri',
+      saturday: 'Sat',
+      sunday: 'Sun',
+    }
 
+    if !scope.arrows then scope.arrows = {
+      year: {
+        left: 'images/white_arrow_left.svg',
+        right: 'images/white_arrow_right.svg'
+      },
+      month: {
+        left: 'images/grey_arrow_left.svg',
+        right: 'images/grey_arrow_right.svg'
+      }
+    }
 
+    # Datepicker logic to get weeks
     getWeeks = (monthLength, startDay, month) ->
       monthDays = []
       # Iterate over other dates
@@ -113,6 +121,8 @@ app.directive('mbDatepicker', [()->
         else
           monthDays.push({value: newDate, isToday: false, isEnabled: true, class: 'day-item'})
       chunk_size = 7;
+
+      # Map reduce by 7 days per week
       weeks = monthDays.map((e, i) ->
         if i % chunk_size == 0 then monthDays.slice(i, i + chunk_size)
         else null;
@@ -122,6 +132,7 @@ app.directive('mbDatepicker', [()->
       if weeks then return weeks
       else return []
 
+    # Logic to get the following month
     scope.nextMonth = (date) ->
       next_month = moment(date).date(0)
       last_day = moment(next_month).add(4, 'months').date(0)
@@ -138,7 +149,7 @@ app.directive('mbDatepicker', [()->
       )
       scope.month = (next_month.format('MMMM'))
 
-
+    # Logic to get the previous month
     scope.previousMonth = (date) ->
       last_month = moment(date).date(0)
       last_day = moment(last_month).add(2, 'months').date(0)
@@ -155,7 +166,7 @@ app.directive('mbDatepicker', [()->
       )
       scope.month = (last_month.format('MMMM'))
 
-
+    # Logic to get the next year
     scope.nextYear = (date) ->
       next_month = moment(date).date(0)
       last_day = moment(next_month).add(1, 'year').add(3, 'months').date(0)
@@ -172,7 +183,7 @@ app.directive('mbDatepicker', [()->
       )
       scope.month = (next_month.format('MMMM'))
 
-
+    # Logic to get the previous year
     scope.previousYear = (date) ->
       last_month = moment(date).date(0)
       last_day = moment(last_month).subtract(1, 'years').add(3, 'months').date(0)
@@ -189,6 +200,7 @@ app.directive('mbDatepicker', [()->
       )
       scope.month = (last_month.format('MMMM'))
 
+    # Logic to hide the view if a date is selected
     scope.selectDate = (day) ->
       if day.isEnabled
         scope.date = day.value.format(scope.dateFormat)

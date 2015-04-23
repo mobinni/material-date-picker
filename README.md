@@ -22,17 +22,43 @@ All the necessary files will be automatically included in your index.html if not
 ###Attributes
 ```html
 
-<mb-datepicker element-id='date1'
-               date-message=""
-               text-color="#EFEF23"
-               line-color="#DDFE66"
-               line-thickness="3"
-               date="date"
-               date-format="YYYY-MM-DD"></mb-datepicker>
+	<mb-datepicker element-id='date1'
+	               input-class="testClass"
+	               arrows="arrows"
+	               calendar-header="header"
+	               date="date"
+	               date-format="YYYY-MM-DD"></mb-datepicker>
 ```
 
-With the following attributes you can adjust the text color or border color of the input without lifting a css finger
-However if you want to adjust the datepicker inner-colors, as for now you have to override those in css.
+With the following attributes you can bind an element id, bind a class for extra styling to the input and all internal fields, etc.
+The calendar-header attribute has a two-way databinding to a scope variable, so you can add dynamic translations, that has the following setup:
+```javascript
+    $scope.header = {
+        monday: 'Mon',
+        tuesday: 'Tue',
+        wednesday: 'Wed',
+        thursday: 'Thu',
+        friday: 'Fri',
+        saturday: 'Sat',
+        sunday: 'Sun',
+    }
+```
+
+The arrows attribute has a two-way databinding to a scope variable that has the following setup:
+```css
+<style type="text/css">
+	.testClass > input {
+		border-bottom: 3px solid #1A4987;
+		border-left: transparent;
+		border-right: transparent;
+		border-top: transparent;
+	}
+</style>
+```
+
+The input-class attribute can be overridden in the following way: 
+
+
 
 An example is provided.
 
