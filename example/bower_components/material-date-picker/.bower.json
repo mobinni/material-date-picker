@@ -22,11 +22,11 @@
   ],
   "devDependencies": {},
   "homepage": "https://github.com/mobinni/material-date-picker",
-  "_release": "9651b44493",
+  "_release": "85da2b374c",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "9651b444930de41782fdaffec535732f92529a41"
+    "commit": "85da2b374c81ff1512804fb229a438dd4e84bfce"
   },
   "_source": "git://github.com/mobinni/material-date-picker.git",
   "_target": "*",
