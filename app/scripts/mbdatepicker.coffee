@@ -27,8 +27,8 @@ app.directive('mbDatepicker', [()->
     minDate: '@'
     maxDate: '@'
     inputClass: '@'
-    arrows: '='
-    calendarHeader: '='
+    arrows: '=?'
+    calendarHeader: '=?'
   }
   template: '
             <div id="dateSelectors" class="date-selectors"  outside-click="hidePicker()">
