@@ -21,7 +21,6 @@ All the necessary files will be automatically included in your index.html if not
 ##Usage
 ###Attributes
 ```html
-
 	<mb-datepicker element-id='date1'
 	               input-class="testClass"
 	               arrows="arrows"
@@ -45,6 +44,20 @@ The calendar-header attribute has a two-way databinding to a scope variable, so 
 ```
 
 The arrows attribute has a two-way databinding to a scope variable that has the following setup:
+```javascript
+    $scope.arrows = {
+        year: {
+            left: 'images/white_arrow_left.svg',
+            right: 'images/white_arrow_right.svg'
+        },
+        month: {
+            left: 'images/grey_arrow_left.svg',
+            right: 'images/grey_arrow_right.svg'
+        }
+    }
+```
+
+The input-class attribute can be overridden in the following way: 
 ```css
 <style type="text/css">
 	.testClass > input {
@@ -55,9 +68,6 @@ The arrows attribute has a two-way databinding to a scope variable that has the 
 	}
 </style>
 ```
-
-The input-class attribute can be overridden in the following way: 
-
 
 
 An example is provided.
