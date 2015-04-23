@@ -6,12 +6,19 @@
 	<title>Example app</title>
 </head>
 <body ng-app="exampleApp">
-
+<style type="text/css">
+	.testClass > input {
+		border-bottom: 3px solid #1A4987;
+		border-left: transparent;
+		border-right: transparent;
+		border-top: transparent;
+	}
+</style>
 <div ng-controller="MainCtrl">
 	<mb-datepicker element-id='date1'
-	               text-color="#1A4987"
-	               line-color="#1A4987"
-	               line-thickness="3"
+	               input-class="testClass"
+	               arrows="arrows"
+	               calendar-header="header"
 	               date="date"
 	               date-format="YYYY-MM-DD"></mb-datepicker>
 </div>
