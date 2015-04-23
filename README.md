@@ -74,10 +74,6 @@ An example is provided.
 
 ##Known issues
 If you can't find the SVG images, look in the images map of the bower component and copy these to your own images map. I left this as an open option.
-The datepicker is known to throw a JQuery light error because of the way the styles are applied to generate enabled or disabled dates.
-It does not lag the performance, I find it to be ugly, it will be the next thing on my list to fix.
 
-##Notes
-The datepicker has changed enormously since the last commit, thinking no one used it I did not update the documents so here's an update
 
 If you have an improvement or request please let me know or post a pull request
