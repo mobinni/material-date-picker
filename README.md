@@ -23,6 +23,7 @@ All the necessary files will be automatically included in your index.html if not
 ```html
 	<mb-datepicker element-id='date1'
 	               input-class="testClass"
+	               input-name="testName"
 	               arrows="arrows"
 	               calendar-header="header"
 	               date="date"
