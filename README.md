@@ -14,10 +14,13 @@ npm install material-date-picker
 ```
 All the necessary files will be automatically included in your index.html if not add
 ```css
-    <link rel="stylesheet" href="bower_components/material-date-picker/build/styles/mbdatepicker.css/>
+    <link rel="stylesheet" href="bower_components/material-date-picker/build/styles/mbdatepicker.css"/>
     <script src="bower_components/material-date-picker/build/mbdatepicker.js"></script>
 ```
-
+You have to add a dependency to material-date-picker module which is called `materialDatePicker`.
+````js
+angular.module('your-app', ['materialDatePicker']);
+````
 ##Usage
 ###Attributes
 ```html
