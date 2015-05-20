@@ -28,12 +28,13 @@ app.directive('mbDatepicker', [()->
     maxDate: '@'
     inputClass: '@'
     inputName: '@'
+    placeholder: '@'
     arrows: '=?'
     calendarHeader: '=?'
   }
   template: '
             <div id="dateSelectors" class="date-selectors"  outside-click="hidePicker()">
-                    <input name="{{ inputName }}" type="text" class="mb-input-field"  ng-click="showPicker()"  class="form-control"  ng-model="date" placeholder="Pick a date">
+                    <input name="{{ inputName }}" type="text" class="mb-input-field"  ng-click="showPicker()"  class="form-control"  ng-model="date" placeholder="{{ placeholder }}">
                     <div class="mb-datepicker" ng-show="isVisible">
                         <table>
                             <caption>
