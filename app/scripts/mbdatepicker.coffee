@@ -5,14 +5,18 @@
 ###
 app = angular.module('materialDatePicker', [])
 
+contains = (container, contained) ->
+  node = contained.parentNode
+  while (node != null && node != container)
+    node = node.parentNode
+  node != null
+
 app.directive("outsideClick", ['$document', '$parse', ($document, $parse) ->
   link: ($scope, $element, $attributes) ->
     scopeExpression = $attributes.outsideClick
     onDocumentClick = (event) ->
-      isChild = $element.find(event.target.tagName).length > 0;
-      $scope.$apply scopeExpression  unless isChild
+      $scope.$apply scopeExpression unless contains($element[0], event.target)
       return
-
     $document.on "click", onDocumentClick
     $element.on "$destroy", ->
       $document.off "click", onDocumentClick
