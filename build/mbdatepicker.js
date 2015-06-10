@@ -4,9 +4,18 @@
   /**
     * By Mo Binni
    */
-  var app;
+  var app, contains;
 
   app = angular.module('materialDatePicker', []);
+
+  contains = function(container, contained) {
+    var node;
+    node = contained.parentNode;
+    while (node !== null && node !== container) {
+      node = node.parentNode;
+    }
+    return node !== null;
+  };
 
   app.directive("outsideClick", [
     '$document', '$parse', function($document, $parse) {
@@ -15,10 +24,8 @@
           var onDocumentClick, scopeExpression;
           scopeExpression = $attributes.outsideClick;
           onDocumentClick = function(event) {
-            var isChild;
-            isChild = $element.find(event.target.tagName).length > 0;
-            if (!isChild) {
-              $scope.$apply(scopeExpression);
+            if (!contains($element[0], event.target)) {
+              return $scope.$apply(scopeExpression);
             }
           };
           $document.on("click", onDocumentClick);
