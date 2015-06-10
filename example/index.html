@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="bower_components/material-date-picker/build/styles/mbdatepicker.css"/>
+	<title>Example app</title>
+</head>
+<body ng-app="exampleApp">
+<style type="text/css">
+	.testClass > input {
+		border-bottom: 3px solid #1A4987;
+		border-left: transparent;
+		border-right: transparent;
+		border-top: transparent;
+	}
+</style>
+<div ng-controller="MainCtrl">
+	<mb-datepicker element-id='date1'
+	               input-class="testClass"
+	               input-name="testName"
+	               arrows="arrows"
+	               calendar-header="header"
+	               date="date"
+	               date-format="YYYY-MM-DD"></mb-datepicker>
+</div>
+</body>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/material-date-picker/build/mbdatepicker.js"></script>
+<script src="bower_components/moment/moment.js"></script>
+<script src="app.js"></script>
+</html>
