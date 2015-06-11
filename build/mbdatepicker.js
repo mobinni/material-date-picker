@@ -25,7 +25,7 @@
           scopeExpression = $attributes.outsideClick;
           onDocumentClick = function(event) {
             if (!contains($element[0], event.target)) {
-              return $scope.$apply(scopeExpression);
+              $scope.$apply(scopeExpression);
             }
           };
           $document.on("click", onDocumentClick);

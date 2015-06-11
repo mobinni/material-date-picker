@@ -1,4 +1,5 @@
-.form-control {
+/* This was breaking out bootstrap! */
+mb-datepicker .form-control {
   width: 135px!important;
 }
 .mb-datepicker {
