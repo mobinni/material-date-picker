@@ -9,7 +9,7 @@ https://material.angularjs.org/
 ##Install
 This component is bower and npm registered 
 ```css
-bower install material-date-picker
+bower install material-date-picker (installs moment as dependency)
 npm install material-date-picker
 npm install moment
 ```
