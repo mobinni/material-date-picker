@@ -235,7 +235,7 @@
           init = function() {
             var days, endDate, firstMonday;
             firstMonday = moment(moment().date(today.month())).startOf('isoweek');
-            if (firstMonday.format('DD') !== '01') {
+            if (firstMonday.date() === 1) {
               firstMonday.subtract(1, 'weeks');
             }
             days = moment(moment().date(today.month())).daysInMonth();

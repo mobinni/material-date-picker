@@ -225,7 +225,7 @@ app.directive('mbDatepicker', [()->
     init = ->
 # First day of month
       firstMonday = moment(moment().date(today.month())).startOf('isoweek')
-      if(firstMonday.format('DD') != '01') then firstMonday.subtract(1, 'weeks')
+      if(firstMonday.date() === 1) then firstMonday.subtract(1, 'weeks')
 
       # No. of days in month
       days = moment(moment().date(today.month())).daysInMonth()
