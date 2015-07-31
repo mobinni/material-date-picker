@@ -81,6 +81,10 @@ caption {
   background: #61C7EC!important;
   color: white!important;
 }
+.selday {
+  background-color: rgba(33, 150, 243, 1);
+  color: white !important;
+}
 .other {
 }
 .weekend {

@@ -32,13 +32,18 @@ app.directive('mbDatepicker', [()->
     maxDate: '@'
     inputClass: '@'
     inputName: '@'
+    labelname: '@'
     placeholder: '@'
     arrows: '=?'
     calendarHeader: '=?'
   }
   template: '
             <div id="dateSelectors" class="date-selectors"  outside-click="hidePicker()">
-                    <input name="{{ inputName }}" type="text" class="mb-input-field"  ng-click="showPicker()"  class="form-control"  ng-model="date" placeholder="{{ placeholder }}">
+
+                    <md-input-container>
+                      <label>{{ labelname }}</label>
+                      <input name="{{ inputName }}" type="text" class="mb-input-field"  ng-click="showPicker()"  class="form-control"  ng-model="date" placeholder="{{ placeholder }}">
+                    </md-input-container>
                     <div class="mb-datepicker" ng-show="isVisible">
                         <table>
                             <caption>
@@ -74,7 +79,7 @@ app.directive('mbDatepicker', [()->
   restrict: 'E',
   transclude: true,
   link: (scope, element, attrs) ->
-    console.log scope.calendarHeader
+    # console.log scope.calendarHeader
 # Vars
     selectors = document.querySelector('#dateSelectors')
     today = moment()
@@ -120,6 +125,8 @@ app.directive('mbDatepicker', [()->
           monthDays.push({value: newDate, isToday: true, isEnabled: false, class: 'disabled'})
         else if newDate.format(scope.dateFormat) == moment().format(scope.dateFormat)
           monthDays.push({value: newDate, isToday: true, isEnabled: true, class: 'day-item today'})
+        else if (newDate.format(scope.dateFormat) == moment().format(scope.date))
+          monthDays.push({value: newDate, isToday: true, isEnabled: true, "class": 'day-item selday'})
         else if(newDate.month() == month)
           monthDays.push({value: newDate, isToday: false, isEnabled: true, class: 'day-item day'})
         else if(newDate.day() == 0 || newDate.day() == 6)
