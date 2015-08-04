@@ -38,7 +38,7 @@
   ]);
 
   app.directive('mbDatepicker', [
-    function() {
+    '$filter', function($filter) {
       return {
         scope: {
           elementId: '@',
@@ -76,13 +76,13 @@
           }
           if (!scope.calendarHeader) {
             scope.calendarHeader = {
-              monday: 'Mon',
-              tuesday: 'Tue',
-              wednesday: 'Wed',
-              thursday: 'Thu',
-              friday: 'Fri',
-              saturday: 'Sat',
-              sunday: 'Sun'
+              monday: $filter('date')(new Date(moment().isoWeekday(1)), 'EEE'),
+              tuesday: $filter('date')(new Date(moment().isoWeekday(2)), 'EEE'),
+              wednesday: $filter('date')(new Date(moment().isoWeekday(3)), 'EEE'),
+              thursday: $filter('date')(new Date(moment().isoWeekday(4)), 'EEE'),
+              friday: $filter('date')(new Date(moment().isoWeekday(5)), 'EEE'),
+              saturday: $filter('date')(new Date(moment().isoWeekday(6)), 'EEE'),
+              sunday: $filter('date')(new Date(moment().isoWeekday(7)), 'EEE')
             };
           }
           if (!scope.arrows) {
@@ -175,7 +175,7 @@
             scope.currentDate = first_day;
             scope.weeks = [];
             scope.weeks = getWeeks(last_day.diff(first_day, 'days'), first_day, next_month.add(3, 'months').month());
-            return scope.month = next_month.format('MMMM');
+            return scope.month = $filter('date')(new Date(next_month), 'MMM');
           };
           scope.previousMonth = function(date) {
             var first_day, last_day, last_month;
@@ -189,7 +189,7 @@
             scope.currentDate = first_day;
             scope.weeks = [];
             scope.weeks = getWeeks(last_day.diff(first_day, 'days'), first_day, last_month.add(1, 'months').month());
-            return scope.month = last_month.format('MMMM');
+            return scope.month = $filter('date')(new Date(last_month), 'MMM');
           };
           scope.nextYear = function(date) {
             var first_day, last_day, next_month;
@@ -203,7 +203,7 @@
             scope.currentDate = first_day;
             scope.weeks = [];
             scope.weeks = getWeeks(last_day.diff(first_day, 'days'), first_day, next_month.add(2, 'months').month());
-            return scope.month = next_month.format('MMMM');
+            return scope.month = $filter('date')(new Date(next_month), 'MMM');
           };
           scope.previousYear = function(date) {
             var first_day, last_day, last_month;
@@ -217,7 +217,7 @@
             scope.currentDate = first_day;
             scope.weeks = [];
             scope.weeks = getWeeks(last_day.diff(first_day, 'days'), first_day, last_month.add(2, 'months').month());
-            return scope.month = last_month.format('MMMM');
+            return scope.month = $filter('date')(new Date(last_month), 'MMM');
           };
           scope.selectDate = function(day) {
             if (day.isEnabled) {
@@ -240,7 +240,7 @@
             }
             days = moment(moment().date(today.month())).daysInMonth();
             endDate = moment().add(1, 'months').date(0);
-            scope.month = endDate.format('MMMM');
+            scope.month = $filter('date')(new Date(endDate), 'MMM');
             if (endDate.day() !== 7) {
               endDate = endDate.add(7 - endDate.day(), 'days');
             }

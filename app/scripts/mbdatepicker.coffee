@@ -23,7 +23,7 @@ app.directive("outsideClick", ['$document', '$parse', ($document, $parse) ->
       return
     return
 ])
-app.directive('mbDatepicker', [()->
+app.directive('mbDatepicker', ['$filter', ($filter)->
   scope: {
     elementId: '@',
     date: '=',
@@ -87,13 +87,13 @@ app.directive('mbDatepicker', [()->
     if scope.minDate then scope.minDate = moment(scope.minDate, scope.dateFormat)
     if scope.maxDate then scope.maxDate = moment(scope.maxDate, scope.dateFormat)
     if !scope.calendarHeader then scope.calendarHeader = {
-      monday: 'Mon',
-      tuesday: 'Tue',
-      wednesday: 'Wed',
-      thursday: 'Thu',
-      friday: 'Fri',
-      saturday: 'Sat',
-      sunday: 'Sun',
+      monday: $filter('date')( new Date(moment().isoWeekday(1)), 'EEE'),
+      tuesday: $filter('date')( new Date(moment().isoWeekday(2)), 'EEE'),
+      wednesday: $filter('date')( new Date(moment().isoWeekday(3)), 'EEE'),
+      thursday: $filter('date')( new Date(moment().isoWeekday(4)), 'EEE'),
+      friday: $filter('date')( new Date(moment().isoWeekday(5)), 'EEE'),
+      saturday: $filter('date')( new Date(moment().isoWeekday(6)), 'EEE'),
+      sunday: $filter('date')( new Date(moment().isoWeekday(7)), 'EEE'),
     }
 
     if !scope.arrows then scope.arrows = {
@@ -153,7 +153,7 @@ app.directive('mbDatepicker', [()->
         first_day,
         next_month.add(3, 'months').month()
       )
-      scope.month = (next_month.format('MMMM'))
+      scope.month = $filter('date')( new Date(next_month), 'MMM' )
 
     # Logic to get the previous month
     scope.previousMonth = (date) ->
@@ -170,7 +170,7 @@ app.directive('mbDatepicker', [()->
         first_day,
         last_month.add(1, 'months').month()
       )
-      scope.month = (last_month.format('MMMM'))
+      scope.month = $filter('date')( new Date(last_month), 'MMM' )
 
     # Logic to get the next year
     scope.nextYear = (date) ->
@@ -187,7 +187,7 @@ app.directive('mbDatepicker', [()->
         first_day,
         next_month.add(2, 'months').month()
       )
-      scope.month = (next_month.format('MMMM'))
+      scope.month = $filter('date')( new Date(next_month), 'MMM' )
 
     # Logic to get the previous year
     scope.previousYear = (date) ->
@@ -204,7 +204,7 @@ app.directive('mbDatepicker', [()->
         first_day,
         last_month.add(2, 'months').month()
       )
-      scope.month = (last_month.format('MMMM'))
+      scope.month = $filter('date')( new Date(last_month), 'MMM' )
 
     # Logic to hide the view if a date is selected
     scope.selectDate = (day) ->
@@ -232,7 +232,7 @@ app.directive('mbDatepicker', [()->
 
       # Last day of month
       endDate = moment().add(1, 'months').date(0);
-      scope.month = (endDate.format('MMMM'))
+      scope.month = $filter('date')( new Date(endDate), 'MMM' )
 
       # Check if last date is sunday, else add days to get to Sunday
       if(endDate.day() != 7)
