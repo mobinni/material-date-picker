@@ -74,7 +74,7 @@ app.directive('mbDatepicker', ['$filter', ($filter)->
   restrict: 'E',
   transclude: true,
   link: (scope, element, attrs) ->
-    console.log scope.calendarHeader
+
 # Vars
     selectors = document.querySelector('#dateSelectors')
     today = moment()
