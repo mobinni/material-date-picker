@@ -2,7 +2,9 @@
 ![Alt text](http://i.imgur.com/dexQ7sd.png)
 
 
-This small component is still in production it's a simple date picker based on the angular-material port of polymer by the people behind ionic
+This small component is still in currently in BETA. It's a simple date picker based on the angular-material port of polymer by the people behind ionic.
+
+The master branch will always contain the most recent version of the datepicker, so if you want to be up to date, don't pull from bower of npm. These are the stable versions.
 
 https://material.angularjs.org/
 
