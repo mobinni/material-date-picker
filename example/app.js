@@ -6,6 +6,7 @@ var app = angular.module('exampleApp', [
 ]);
 
 app.controller('MainCtrl', function ($scope) {
+    $scope.date = null;
     $scope.arrows = {
         year: {
             left: 'images/white_arrow_left.svg',
