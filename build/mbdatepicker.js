@@ -52,12 +52,11 @@
           arrows: '=?',
           calendarHeader: '=?'
         },
-        template: '<div id="dateSelectors" class="date-selectors"  outside-click="hidePicker()"> <input name="{{ inputName }}" type="text" class="mb-input-field"  ng-click="showPicker()"  class="form-control"  ng-model="date" placeholder="{{ placeholder }}"> <div class="mb-datepicker" ng-show="isVisible"> <table> <caption> <div class="header-year-wrapper"> <span style="display: inline-block; float: left; padding-left:20px; cursor: pointer" class="noselect" ng-click="previousYear(currentDate)"><img style="height: 10px;" ng-src="{{ arrows.year.left }}"/></span> <span class="header-year noselect" ng-class="noselect">{{ year }}</span> <span style="display: inline-block; float: right; padding-right:20px; cursor: pointer" class="noselect" ng-click="nextYear(currentDate)"><img style="height: 10px;" ng-src="{{ arrows.year.right }}"/></span> </div> <div class="header-nav-wrapper"> <span class="header-item noselect" style="float: left; cursor:pointer" ng-click="previousMonth(currentDate)"><img style="height: 10px;" ng-src="{{ arrows.month.left }}"/></span> <span class="header-month noselect">{{ month }}</span> <span class="header-item header-right noselect" style="float: right; cursor:pointer" ng-click="nextMonth(currentDate)"> <img style="height: 10px;" ng-src="{{ arrows.month.right }}"/></span> </div> </caption> <tbody> <tr> <td class="day-head">{{ calendarHeader.monday }}</td> <td class="day-head">{{ calendarHeader.tuesday }}</td> <td class="day-head">{{ calendarHeader.wednesday }}</td> <td class="day-head">{{ calendarHeader.thursday }}</td> <td class="day-head">{{ calendarHeader.friday }}</td> <td class="day-head">{{ calendarHeader.saturday }}</td> <td class="day-head">{{ calendarHeader.sunday }}</td> </tr> <tr class="days" ng-repeat="week in weeks"> <td ng-click="selectDate(day)" class="noselect" ng-class="day.class" ng-repeat="day in week">{{ day.value.format(\'DD\') }}</td> </tr> </tbody> </table> </div> </div>',
+        template: '<div id="dateSelectors" class="date-selectors"  outside-click="hidePicker()"> <input name="{{ inputName }}" type="text" class="mb-input-field"  ng-click="showPicker()"  class="form-control"  ng-model="date" placeholder="{{ placeholder }}"> <div class="mb-datepicker" ng-show="isVisible"> <table> <caption> <div class="header-year-wrapper"> <span style="display: inline-block; float: left; padding-left:20px; cursor: pointer" class="noselect" ng-click="previousYear(currentDate)"><img style="height: 10px;" ng-src="{{ arrows.year.left }}"/></span> <span class="header-year noselect" ng-class="noselect">{{ year }}</span> <span style="display: inline-block; float: right; padding-right:20px; cursor: pointer" class="noselect" ng-click="nextYear(currentDate)"><img style="height: 10px;" ng-src="{{ arrows.year.right }}"/></span> </div> <div class="header-nav-wrapper"> <span class="header-item noselect" style="float: left; cursor:pointer" ng-click="previousMonth(currentDate)"><img style="height: 10px;" ng-src="{{ arrows.month.left }}"/></span> <span class="header-month noselect">{{ month }}</span> <span class="header-item header-right noselect" style="float: right; cursor:pointer" ng-click="nextMonth(currentDate)"> <img style="height: 10px;" ng-src="{{ arrows.month.right }}"/></span> </div> </caption> <tbody> <tr> <td class="day-head">{{ ::calendarHeader.monday }}</td> <td class="day-head">{{ ::calendarHeader.tuesday }}</td> <td class="day-head">{{ ::calendarHeader.wednesday }}</td> <td class="day-head">{{ ::calendarHeader.thursday }}</td> <td class="day-head">{{ ::calendarHeader.friday }}</td> <td class="day-head">{{ ::calendarHeader.saturday }}</td> <td class="day-head">{{ ::calendarHeader.sunday }}</td> </tr> <tr class="days" ng-repeat="week in weeks"> <td ng-click="selectDate(day)" class="noselect" class="{{ ::day.class }}" ng-repeat="day in week"> {{ ::day.value }} </td> </tr> </tbody> </table> </div> </div>',
         restrict: 'E',
         transclude: true,
         link: function(scope, element, attrs) {
           var getWeeks, init, selectors, today;
-          console.log(scope.calendarHeader);
           selectors = document.querySelector('#dateSelectors');
           today = moment();
           scope.month = '';
@@ -103,49 +102,37 @@
             for (day = j = 0, ref = monthLength; 0 <= ref ? j <= ref : j >= ref; day = 0 <= ref ? ++j : --j) {
               start = moment(startDay);
               newDate = start.add(day, 'd');
+              day = {
+                date: newDate,
+                value: newDate.format('DD')
+              };
               if (scope.minDate && moment(newDate, scope.dateFormat) <= moment(scope.minDate, scope.dateFormat)) {
-                monthDays.push({
-                  value: newDate,
-                  isToday: true,
-                  isEnabled: false,
-                  "class": 'disabled'
-                });
+                day.isToday = true;
+                day.isEnabled = false;
+                day["class"] = 'disabled';
+                monthDays.push(day);
               } else if (scope.maxDate && moment(newDate, scope.dateFormat) >= moment(scope.maxDate, scope.dateFormat)) {
-                monthDays.push({
-                  value: newDate,
-                  isToday: true,
-                  isEnabled: false,
-                  "class": 'disabled'
-                });
+                day.isToday = true;
+                day.isEnabled = false;
+                day["class"] = 'disabled';
               } else if (newDate.format(scope.dateFormat) === moment().format(scope.dateFormat)) {
-                monthDays.push({
-                  value: newDate,
-                  isToday: true,
-                  isEnabled: true,
-                  "class": 'day-item today'
-                });
+                day.isToday = true;
+                day.isEnabled = true;
+                day["class"] = 'day-item today';
               } else if (newDate.month() === month) {
-                monthDays.push({
-                  value: newDate,
-                  isToday: false,
-                  isEnabled: true,
-                  "class": 'day-item day'
-                });
+                day.isToday = false;
+                day.isEnabled = true;
+                day["class"] = 'day-item day';
               } else if (newDate.day() === 0 || newDate.day() === 6) {
-                monthDays.push({
-                  value: newDate,
-                  isToday: false,
-                  isEnabled: true,
-                  "class": 'day-item weekend'
-                });
+                day.isToday = false;
+                day.isEnabled = true;
+                day["class"] = 'day-item weekend';
               } else {
-                monthDays.push({
-                  value: newDate,
-                  isToday: false,
-                  isEnabled: true,
-                  "class": 'day-item'
-                });
+                day.isToday = false;
+                day.isEnabled = true;
+                day["class"] = 'day-item';
               }
+              monthDays.push(day);
             }
             chunk_size = 7;
             weeks = monthDays.map(function(e, i) {
@@ -221,7 +208,7 @@
           };
           scope.selectDate = function(day) {
             if (day.isEnabled) {
-              scope.date = day.value.format(scope.dateFormat);
+              scope.date = day.date.format(scope.dateFormat);
               return scope.isVisible = false;
             }
           };

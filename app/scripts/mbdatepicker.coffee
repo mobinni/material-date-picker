@@ -55,16 +55,18 @@ app.directive('mbDatepicker', ['$filter', ($filter)->
                             </caption>
                             <tbody>
                               <tr>
-                                <td class="day-head">{{ calendarHeader.monday }}</td>
-                                <td class="day-head">{{ calendarHeader.tuesday }}</td>
-                                <td class="day-head">{{ calendarHeader.wednesday }}</td>
-                                <td class="day-head">{{ calendarHeader.thursday }}</td>
-                                <td class="day-head">{{ calendarHeader.friday }}</td>
-                                <td class="day-head">{{ calendarHeader.saturday }}</td>
-                                <td class="day-head">{{ calendarHeader.sunday }}</td>
+                                <td class="day-head">{{ ::calendarHeader.monday }}</td>
+                                <td class="day-head">{{ ::calendarHeader.tuesday }}</td>
+                                <td class="day-head">{{ ::calendarHeader.wednesday }}</td>
+                                <td class="day-head">{{ ::calendarHeader.thursday }}</td>
+                                <td class="day-head">{{ ::calendarHeader.friday }}</td>
+                                <td class="day-head">{{ ::calendarHeader.saturday }}</td>
+                                <td class="day-head">{{ ::calendarHeader.sunday }}</td>
                               </tr>
                               <tr class="days" ng-repeat="week in weeks">
-                                <td ng-click="selectDate(day)" class="noselect" ng-class="day.class" ng-repeat="day in week">{{ day.value.format(\'DD\') }}</td>
+                                <td ng-click="selectDate(day)" class="noselect" ng-class="::day.class" ng-repeat="day in week">
+                                  {{ ::day.value }}
+                                </td>
                               </tr>
                             </tbody>
                         </table>
@@ -87,13 +89,13 @@ app.directive('mbDatepicker', ['$filter', ($filter)->
     if scope.minDate then scope.minDate = moment(scope.minDate, scope.dateFormat)
     if scope.maxDate then scope.maxDate = moment(scope.maxDate, scope.dateFormat)
     if !scope.calendarHeader then scope.calendarHeader = {
-      monday: $filter('date')( new Date(moment().isoWeekday(1)), 'EEE'),
-      tuesday: $filter('date')( new Date(moment().isoWeekday(2)), 'EEE'),
-      wednesday: $filter('date')( new Date(moment().isoWeekday(3)), 'EEE'),
-      thursday: $filter('date')( new Date(moment().isoWeekday(4)), 'EEE'),
-      friday: $filter('date')( new Date(moment().isoWeekday(5)), 'EEE'),
-      saturday: $filter('date')( new Date(moment().isoWeekday(6)), 'EEE'),
-      sunday: $filter('date')( new Date(moment().isoWeekday(7)), 'EEE'),
+      monday: $filter('date')(new Date(moment().isoWeekday(1)), 'EEE'),
+      tuesday: $filter('date')(new Date(moment().isoWeekday(2)), 'EEE'),
+      wednesday: $filter('date')(new Date(moment().isoWeekday(3)), 'EEE'),
+      thursday: $filter('date')(new Date(moment().isoWeekday(4)), 'EEE'),
+      friday: $filter('date')(new Date(moment().isoWeekday(5)), 'EEE'),
+      saturday: $filter('date')(new Date(moment().isoWeekday(6)), 'EEE'),
+      sunday: $filter('date')(new Date(moment().isoWeekday(7)), 'EEE'),
     }
 
     if !scope.arrows then scope.arrows = {
@@ -114,18 +116,34 @@ app.directive('mbDatepicker', ['$filter', ($filter)->
       for day in [0..monthLength]
         start = moment(startDay)
         newDate = start.add(day, 'd')
+        day = {date: newDate, value: newDate.format('DD')};
         if(scope.minDate and moment(newDate, scope.dateFormat) <= moment(scope.minDate, scope.dateFormat))
-          monthDays.push({value: newDate, isToday: true, isEnabled: false, class: 'disabled'})
+          day.isToday = true;
+          day.isEnabled = false;
+          day.class = 'disabled';
+          monthDays.push(day);
         else if(scope.maxDate and moment(newDate, scope.dateFormat) >= moment(scope.maxDate, scope.dateFormat))
-          monthDays.push({value: newDate, isToday: true, isEnabled: false, class: 'disabled'})
+          day.isToday = true;
+          day.isEnabled = false;
+          day.class = 'disabled';
         else if newDate.format(scope.dateFormat) == moment().format(scope.dateFormat)
-          monthDays.push({value: newDate, isToday: true, isEnabled: true, class: 'day-item today'})
+          day.isToday = true;
+          day.isEnabled = true;
+          day.class = 'day-item today';
         else if(newDate.month() == month)
-          monthDays.push({value: newDate, isToday: false, isEnabled: true, class: 'day-item day'})
+          day.isToday = false;
+          day.isEnabled = true;
+          day.class = 'day-item day';
         else if(newDate.day() == 0 || newDate.day() == 6)
-          monthDays.push({value: newDate, isToday: false, isEnabled: true, class: 'day-item weekend'})
+          day.isToday = false;
+          day.isEnabled = true;
+          day.class = 'day-item weekend';
         else
-          monthDays.push({value: newDate, isToday: false, isEnabled: true, class: 'day-item'})
+          day.isToday = false;
+          day.isEnabled = true;
+          day.class = 'day-item';
+        monthDays.push(day);
+
       chunk_size = 7;
 
       # Map reduce by 7 days per week
@@ -153,7 +171,7 @@ app.directive('mbDatepicker', ['$filter', ($filter)->
         first_day,
         next_month.add(3, 'months').month()
       )
-      scope.month = $filter('date')( new Date(next_month), 'MMM' )
+      scope.month = $filter('date')(new Date(next_month), 'MMM')
 
     # Logic to get the previous month
     scope.previousMonth = (date) ->
@@ -170,7 +188,7 @@ app.directive('mbDatepicker', ['$filter', ($filter)->
         first_day,
         last_month.add(1, 'months').month()
       )
-      scope.month = $filter('date')( new Date(last_month), 'MMM' )
+      scope.month = $filter('date')(new Date(last_month), 'MMM')
 
     # Logic to get the next year
     scope.nextYear = (date) ->
@@ -187,7 +205,7 @@ app.directive('mbDatepicker', ['$filter', ($filter)->
         first_day,
         next_month.add(2, 'months').month()
       )
-      scope.month = $filter('date')( new Date(next_month), 'MMM' )
+      scope.month = $filter('date')(new Date(next_month), 'MMM')
 
     # Logic to get the previous year
     scope.previousYear = (date) ->
@@ -204,12 +222,12 @@ app.directive('mbDatepicker', ['$filter', ($filter)->
         first_day,
         last_month.add(2, 'months').month()
       )
-      scope.month = $filter('date')( new Date(last_month), 'MMM' )
+      scope.month = $filter('date')(new Date(last_month), 'MMM')
 
     # Logic to hide the view if a date is selected
     scope.selectDate = (day) ->
       if day.isEnabled
-        scope.date = day.value.format(scope.dateFormat)
+        scope.date = day.date.format(scope.dateFormat)
         scope.isVisible = false;
 
 
@@ -225,14 +243,14 @@ app.directive('mbDatepicker', ['$filter', ($filter)->
     init = ->
 # First day of month
       firstMonday = moment(moment().date(today.month())).startOf('isoweek')
-      if(firstMonday.date() === 1) then firstMonday.subtract(1, 'weeks')
+      if(firstMonday.date() == 1) then firstMonday.subtract(1, 'weeks')
 
       # No. of days in month
       days = moment(moment().date(today.month())).daysInMonth()
 
       # Last day of month
       endDate = moment().add(1, 'months').date(0);
-      scope.month = $filter('date')( new Date(endDate), 'MMM' )
+      scope.month = $filter('date')(new Date(endDate), 'MMM')
 
       # Check if last date is sunday, else add days to get to Sunday
       if(endDate.day() != 7)
