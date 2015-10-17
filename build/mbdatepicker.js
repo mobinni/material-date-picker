@@ -50,7 +50,8 @@
           inputName: '@',
           placeholder: '@',
           arrows: '=?',
-          calendarHeader: '=?'
+          calendarHeader: '=?',
+          utcMode: '='
         },
         template: '<div id="dateSelectors" class="date-selectors"  outside-click="hidePicker()"> <input name="{{ inputName }}" type="text" class="mb-input-field"  ng-click="showPicker()"  class="form-control"  ng-model="date" placeholder="{{ placeholder }}"> <div class="mb-datepicker" ng-show="isVisible"> <table> <caption> <div class="header-year-wrapper"> <span style="display: inline-block; float: left; padding-left:20px; cursor: pointer" class="noselect" ng-click="previousYear(currentDate)"><img style="height: 10px;" ng-src="{{ arrows.year.left }}"/></span> <span class="header-year noselect" ng-class="noselect">{{ year }}</span> <span style="display: inline-block; float: right; padding-right:20px; cursor: pointer" class="noselect" ng-click="nextYear(currentDate)"><img style="height: 10px;" ng-src="{{ arrows.year.right }}"/></span> </div> <div class="header-nav-wrapper"> <span class="header-item noselect" style="float: left; cursor:pointer" ng-click="previousMonth(currentDate)"><img style="height: 10px;" ng-src="{{ arrows.month.left }}"/></span> <span class="header-month noselect">{{ month }}</span> <span class="header-item header-right noselect" style="float: right; cursor:pointer" ng-click="nextMonth(currentDate)"> <img style="height: 10px;" ng-src="{{ arrows.month.right }}"/></span> </div> </caption> <tbody> <tr> <td class="day-head">{{ ::calendarHeader.monday }}</td> <td class="day-head">{{ ::calendarHeader.tuesday }}</td> <td class="day-head">{{ ::calendarHeader.wednesday }}</td> <td class="day-head">{{ ::calendarHeader.thursday }}</td> <td class="day-head">{{ ::calendarHeader.friday }}</td> <td class="day-head">{{ ::calendarHeader.saturday }}</td> <td class="day-head">{{ ::calendarHeader.sunday }}</td> </tr> <tr class="days" ng-repeat="week in weeks"> <td ng-click="selectDate(day)" class="noselect" ng-class="::day.class" ng-repeat="day in week"> {{ ::day.value }} </td> </tr> </tbody> </table> </div> </div>',
         restrict: 'E',
@@ -59,6 +60,9 @@
           var getWeeks, init, selectors, today;
           selectors = document.querySelector('#dateSelectors');
           today = moment();
+          if (scope.utcMode) {
+            today.utc();
+          }
           scope.month = '';
           scope.year = today.year();
           if (scope.inputClass) {
@@ -69,9 +73,15 @@
           }
           if (scope.minDate) {
             scope.minDate = moment(scope.minDate, scope.dateFormat);
+            if (scope.utcMode) {
+              scope.minDate.utc();
+            }
           }
           if (scope.maxDate) {
             scope.maxDate = moment(scope.maxDate, scope.dateFormat);
+            if (scope.utcMode) {
+              scope.maxDate.utc();
+            }
           }
           if (!scope.calendarHeader) {
             scope.calendarHeader = {
@@ -101,6 +111,9 @@
             monthDays = [];
             for (day = j = 0, ref = monthLength; 0 <= ref ? j <= ref : j >= ref; day = 0 <= ref ? ++j : --j) {
               start = moment(startDay);
+              if (scope.utcMode) {
+                start.utc();
+              }
               newDate = start.add(day, 'd');
               day = {
                 date: newDate,
@@ -221,7 +234,11 @@
           };
           init = function() {
             var days, endDate, firstMonday;
-            firstMonday = moment(moment().date(today.month())).startOf('isoweek');
+            if (scope.utcMode) {
+              firstMonday = moment(moment().utc().date(today.month())).startOf('isoweek');
+            } else {
+              firstMonday = moment(moment().date(today.month())).startOf('isoweek');
+            }
             if (firstMonday.date() === 1) {
               firstMonday.subtract(1, 'weeks');
             }
