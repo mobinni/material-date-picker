@@ -250,9 +250,9 @@ app.directive('mbDatepicker', ['$filter', ($filter)->
     init = ->
 # First day of month
       if scope.utcMode
-        firstMonday = moment(moment().utc().date(today.month())).startOf('isoweek')
+        firstMonday = moment.utc(moment.utc().date(1)).startOf('isoweek')
       else
-        firstMonday = moment(moment().date(today.month())).startOf('isoweek')
+        firstMonday = moment(moment().date(1)).startOf('isoweek')
       if(firstMonday.date() == 1) then firstMonday.subtract(1, 'weeks')
 
       # No. of days in month

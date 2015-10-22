@@ -235,9 +235,9 @@
           init = function() {
             var days, endDate, firstMonday;
             if (scope.utcMode) {
-              firstMonday = moment(moment().utc().date(today.month())).startOf('isoweek');
+              firstMonday = moment.utc(moment.utc().date(1)).startOf('isoweek');
             } else {
-              firstMonday = moment(moment().date(today.month())).startOf('isoweek');
+              firstMonday = moment(moment().date(1)).startOf('isoweek');
             }
             if (firstMonday.date() === 1) {
               firstMonday.subtract(1, 'weeks');
