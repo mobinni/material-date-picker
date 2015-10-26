@@ -34,7 +34,8 @@ app.directive('mbDatepicker', ['$filter', ($filter)->
     inputName: '@'
     placeholder: '@'
     arrows: '=?'
-    calendarHeader: '=?'
+    calendarHeader: '=?',
+    utcMode: '=' # UTC mode can be used for fixed dates that should never be converted to local timezones (e.g., birth dates)
   }
   template: '
             <div id="dateSelectors" class="date-selectors"  outside-click="hidePicker()">
@@ -80,14 +81,19 @@ app.directive('mbDatepicker', ['$filter', ($filter)->
 # Vars
     selectors = document.querySelector('#dateSelectors')
     today = moment()
+    if scope.utcMode then today.utc()
     scope.month = '';
     scope.year = today.year();
 
     # Casual definition
     if scope.inputClass then selectors.className = selectors.className + " " + scope.inputClass
     if !scope.dateFormat then scope.dateFormat = "YYYY-MM-DD"
-    if scope.minDate then scope.minDate = moment(scope.minDate, scope.dateFormat)
-    if scope.maxDate then scope.maxDate = moment(scope.maxDate, scope.dateFormat)
+    if scope.minDate
+      scope.minDate = moment(scope.minDate, scope.dateFormat)
+      if scope.utcMode then scope.minDate.utc()
+    if scope.maxDate
+      scope.maxDate = moment(scope.maxDate, scope.dateFormat)
+      if scope.utcMode then scope.maxDate.utc()
     if !scope.calendarHeader then scope.calendarHeader = {
       monday: $filter('date')(new Date(moment().isoWeekday(1)), 'EEE'),
       tuesday: $filter('date')(new Date(moment().isoWeekday(2)), 'EEE'),
@@ -115,6 +121,7 @@ app.directive('mbDatepicker', ['$filter', ($filter)->
       # Iterate over other dates
       for day in [0..monthLength]
         start = moment(startDay)
+        if scope.utcMode then start.utc()
         newDate = start.add(day, 'd')
         day = {date: newDate, value: newDate.format('DD')};
         if(scope.minDate and moment(newDate, scope.dateFormat) <= moment(scope.minDate, scope.dateFormat))
@@ -242,7 +249,10 @@ app.directive('mbDatepicker', ['$filter', ($filter)->
 
     init = ->
 # First day of month
-      firstMonday = moment(moment().date(1)).startOf('isoweek')
+      if scope.utcMode
+        firstMonday = moment.utc(moment.utc().date(1)).startOf('isoweek')
+      else
+        firstMonday = moment(moment().date(1)).startOf('isoweek')
       if(firstMonday.date() == 1) then firstMonday.subtract(1, 'weeks')
 
       # No. of days in month
