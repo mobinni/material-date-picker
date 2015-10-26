@@ -221,7 +221,7 @@
           };
           init = function() {
             var days, endDate, firstMonday;
-            firstMonday = moment(moment().date(today.month())).startOf('isoweek');
+            firstMonday = moment(moment().date(1)).startOf('isoweek');
             if (firstMonday.date() === 1) {
               firstMonday.subtract(1, 'weeks');
             }
