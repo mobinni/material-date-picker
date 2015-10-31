@@ -2,7 +2,7 @@
   "name": "material-date-picker",
   "version": "1.2.1",
   "dependencies": {
-    "moment": "~2.9.0"
+    "moment": "~2.10.6"
   },
   "appPath": "app",
   "authors": [
