@@ -35,11 +35,15 @@ app.directive('mbDatepicker', ['$filter', ($filter)->
     placeholder: '@'
     arrows: '=?'
     calendarHeader: '=?',
-    utcMode: '=' # UTC mode can be used for fixed dates that should never be converted to local timezones (e.g., birth dates)
+    utcMode: '=' # UTC mode can be used for fixed dates that should never be converted to local timezones (e.g., birth dates),
+    ngDisabled: '=',
+    label: '@',
+    customInputClass: '@'
   }
   template: '
             <div id="dateSelectors" class="date-selectors"  outside-click="hidePicker()">
-                    <input name="{{ inputName }}" type="text" class="mb-input-field"  ng-click="showPicker()"  class="form-control"  ng-model="date" placeholder="{{ placeholder }}">
+                    <label ng-bind="label" class="mb-input-label" for="{{inputName}}"></label>
+                    <input name="{{ inputName }}" type="text" ng-disabled="{{ngDisabled}}" ng-class="{disabled: ngDisabled}" class="mb-input-field {{customInputClass}}"  ng-click="showPicker()"  class="form-control" id="{{inputName}}" ng-model="date" placeholder="{{ placeholder }}">
                     <div class="mb-datepicker" ng-show="isVisible">
                         <table>
                             <caption>
@@ -66,7 +70,9 @@ app.directive('mbDatepicker', ['$filter', ($filter)->
                               </tr>
                               <tr class="days" ng-repeat="week in weeks">
                                 <td ng-click="selectDate(day)" class="noselect" ng-class="::day.class" ng-repeat="day in week">
-                                  {{ ::day.value }}
+                                  <div style="display: block;" ng-class="{selected: selectedDate === day.selected}">
+                                    {{ ::day.value }}
+                                  </div>
                                 </td>
                               </tr>
                             </tbody>
@@ -235,8 +241,12 @@ app.directive('mbDatepicker', ['$filter', ($filter)->
     scope.selectDate = (day) ->
       if day.isEnabled
         scope.date = day.date.format(scope.dateFormat)
-        scope.isVisible = false;
-
+        
+        if day.selected == scope.date
+          scope.selectedDate = day.selected
+          
+      scope.isVisible = false;
+      
 
     scope.isVisible = false
     scope.showPicker = ->
