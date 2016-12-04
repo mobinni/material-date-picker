@@ -1,3 +1,5 @@
+This project is no longer maintained, all issues you have, it would be best to fork off and fix. PR's are still appreciated.
+
 ## Angular material datepicker
 ![Alt text](http://i.imgur.com/dexQ7sd.png)
 
